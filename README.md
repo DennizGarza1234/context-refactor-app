@@ -1,16 +1,159 @@
-# React + Vite
+# React Context API Refactor App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This project demonstrates how to eliminate prop drilling in a React application using the Context API.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The application contains a nested component structure:
 
-## React Compiler
+App → Dashboard → Sidebar → UserProfile
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Instead of passing user data through multiple components using props, the application uses `createContext` and `useContext` to allow deeply nested components to access shared data directly.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+
+- React Context API implementation
+- Shared global user state
+- Removal of prop drilling
+- Functional component architecture
+- Clean and responsive UI
+- Vite development environment with Hot Module Replacement
+
+---
+
+## Technologies Used
+
+- React
+- Vite
+- JavaScript
+- CSS
+
+---
+
+## Project Structure
+
+```plaintext
+src/
+│
+├── components/
+│   ├── Dashboard.jsx
+│   ├── Sidebar.jsx
+│   └── UserProfile.jsx
+│
+├── UserContext.jsx
+├── App.jsx
+├── App.css
+├── index.css
+└── main.jsx
+```
+
+---
+
+## Installation and Setup
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/context-refactor-app.git
+```
+
+### Navigate Into the Project Directory
+
+```bash
+cd context-refactor-app
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Start the Development Server
+
+```bash
+npm run dev
+```
+
+---
+
+## Context API Implementation
+
+### UserContext.jsx
+
+The application creates a context using:
+
+```jsx
+createContext()
+```
+
+A `UserProvider` component stores the shared user object and provides it to all nested components.
+
+---
+
+## useContext Implementation
+
+Inside `UserProfile.jsx`, the user data is accessed directly using:
+
+```jsx
+const { user } = useContext(UserContext);
+```
+
+This removes the need to pass props through intermediate components.
+
+---
+
+## User Data Displayed
+
+The application displays:
+
+- User name
+- User email
+- Theme preference
+
+---
+
+## Test Cases
+
+### Normal Test Cases
+
+| Test Case | Expected Result | Status |
+|---|---|---|
+| Display user name | Name displays correctly | Passed |
+| Display user email | Email displays correctly | Passed |
+| Display theme preference | Theme displays correctly | Passed |
+
+---
+
+### Edge Test Cases
+
+| Test Case | Expected Result | Status |
+|---|---|---|
+| Empty user name | App still renders safely | Passed |
+| Missing email value | App continues functioning | Passed |
+| Long user name | Layout remains readable | Passed |
+
+---
+
+## Learning Outcomes
+
+This project demonstrates:
+
+- How to create and use React Context API
+- How to eliminate prop drilling
+- How to share global state between components
+- How to use the `useContext` hook
+- Component organization and state management
+
+---
+
+## Youtube
+
+
+---
+
+## Conclusion
+
+This project successfully refactors a React component tree to use Context API instead of prop drilling. The implementation improves scalability, readability, and maintainability while successfully passing all required test cases.
